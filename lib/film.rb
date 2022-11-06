@@ -9,9 +9,12 @@ class Film < Product
   end
 
   def self.from_file(path)
-    film = File.open(path.to_s, 'r')
-    new(name: film.readline(chomp: true), director: film.readline(chomp: true), year: film.readline(chomp: true).to_i,
-        price: film.readline(chomp: true).to_i, amount: film.readline(chomp: true).to_i)
+    film = File.open(path, 'r').readlines(chomp: true)
+    new(name: film[0],
+        director: film[1],
+        year: film[2].to_i,
+        price: film[3].to_i,
+        amount: film[4].to_i)
   end
 
   def to_s

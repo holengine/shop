@@ -10,9 +10,13 @@ class Disk < Product
   end
 
   def self.from_file(path)
-    disk = File.open(path.to_s, 'r')
-    new(name: disk.readline(chomp: true), author: disk.readline(chomp: true), genre: disk.readline(chomp: true),
-        year: disk.readline(chomp: true), price: disk.readline(chomp: true).to_i, amount: disk.readline(chomp: true).to_i)
+    disk = File.open(path, 'r').readlines(chomp: true)
+    new(name: disk[0],
+        author: disk[1],
+        genre: disk[2],
+        year: disk[3],
+        price: disk[4].to_i,
+        amount: disk[5].to_i)
   end
 
   def to_s
